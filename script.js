@@ -5,7 +5,9 @@ function showDetails(point) {
   var date;
   var header;
   var text;
+  Highcharts.charts[0].get("p" + curPoint).setState();
   curPoint = point;
+  Highcharts.charts[0].get("p" + curPoint).setState("hover");
 
   switch (point) {
     case Date.parse("2012-10-17"):
@@ -217,13 +219,6 @@ Highcharts.chart("chart", {
           }
         }
       },
-      states: {
-        hover: {
-          marker: {
-            enabled: false
-          }
-        }
-      },
       point: {
         events: {
           click: function click(event) {
@@ -235,16 +230,24 @@ Highcharts.chart("chart", {
   },
   series: [{
     name: "Evropská komise",
-    data: [[Date.parse("2012-10-17"), 4], [Date.parse("2014-12-16"), 4], [Date.parse("2015-06-17"), 4]]
+    data: [{ x: Date.parse("2012-10-17"), y: 4, id: "p" + Date.parse("2012-10-17") },
+    { x: Date.parse("2014-12-16"), y: 4, id: "p" + Date.parse("2014-12-16") },
+    { x: Date.parse("2015-06-17"), y: 4, id: "p" + Date.parse("2015-06-17") }]
   }, {
     name: "Národní parlamenty",
-    data: [[Date.parse("2012-12-20"), 3]]
+    data: [{ x: Date.parse("2012-12-20"), y: 3, id: "p" + Date.parse("2012-12-20") }]
   }, {
     name: "Rada EU",
-    data: [[Date.parse("2013-02-22"), 2], [Date.parse("2013-12-12"), 2], [Date.parse("2015-07-13"), 2], [Date.parse("2015-09-09"), 2]]
+    data: [{ x: Date.parse("2013-02-22"), y: 2, id: "p" + Date.parse("2013-02-22") },
+    { x: Date.parse("2013-12-12"), y: 2, id: "p" + Date.parse("2013-12-12") },
+    { x: Date.parse("2015-07-13"), y: 2, id: "p" + Date.parse("2015-07-13") },
+    { x: Date.parse("2015-09-09"), y: 2, id: "p" + Date.parse("2015-09-09") }]
   }, {
     name: "Evropský parlament",
-    data: [[Date.parse("2013-07-29"), 1], [Date.parse("2013-09-11"), 1], [Date.parse("2015-02-24"), 1], [Date.parse("2015-04-28"), 1]]
+    data: [{ x: Date.parse("2013-07-29"), y: 1, id: "p" + Date.parse("2013-07-29") },
+    { x: Date.parse("2013-09-11"), y: 1, id: "p" + Date.parse("2013-09-11") },
+    { x: Date.parse("2015-02-24"), y: 1, id: "p" + Date.parse("2015-02-24") },
+    { x: Date.parse("2015-04-28"), y: 1, id: "p" + Date.parse("2015-04-28") }]
   }]
 });
 document.getElementById("button-next").addEventListener("click", function () {
