@@ -80,13 +80,13 @@ function showDetails(point) {
     case Date.parse("2015-07-13"):
       date = "13. července 2015";
       header = "Reakce rady po 2. čtení";
-      text = "<p>Ani rada nemá další návrhy.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/HIS/?uri=CELEX:32015L1513&qid=1558362384004#2012-10-17_ADP_byCOM'>Více na webu Evropské unie...</a></i></p>";
+      text = "<p>Ani rada nemá další návrhy.</p><p>&nbsp;</p>";
       break;
 
     case Date.parse("2015-09-09"):
       date = "9. září 2015";
       header = "Podpis";
-      text = "<p>Předseda Evropského parlamentu i Rady EU směrnici podepisují.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=2012/0288(COD)&l=en'>Více na webu Evropské unie...</a></i></p>";
+      text = "<p>Předseda Evropského parlamentu i Rady EU směrnici podepisují.</p><p>&nbsp;</p>";
       break;
 
     default:
