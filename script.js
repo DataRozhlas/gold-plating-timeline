@@ -115,6 +115,7 @@ Highcharts.chart("chart", {
   credits: {
     enabled: false
   },
+  colors: ["#EA614A", "#ECA038", "#A38456", "#008836", "#20649B", "#6B96CA", "#A87A93", "#D19C95"],
   xAxis: {
     type: "datetime",
     startOnTick: true,
@@ -211,6 +212,7 @@ Highcharts.chart("chart", {
   plotOptions: {
     scatter: {
       marker: {
+        symbol: "circle",
         radius: 5,
         states: {
           hover: {
