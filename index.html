@@ -8,181 +8,236 @@
 </head>
 
 <body>
-    <link title="timeline-styles" rel="stylesheet"
-        href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline-min.js"></script>
-    <div id="timeline-embed" style="max-width: 620px; height: 60vh; margin: 0 auto;"></div>
+    <style>
+        .highcharts-point {
+            cursor: pointer;
+        }
+    </style>
+    <div id="chart-desc" style="height:200px;width:620px;margin:0 auto;font-family: sans-serif;">
+        <h2 id="chart-desc-header"></h2>
+        <div id="chart-desc-text"></div>
+    </div>
+    <div id="chart" style="max-width:620px;height:200px;margin:0 auto;"></div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script>
-        var timeline_json = {
-            "events": [
-                {
-                    "start_date": {
-                        "day": "17",
-                        "month": "10",
-                        "year": "2012"
-                    },
-                    "group": "Komise",
-                    "text": {
-                        "headline": "Návrh směrnice",
-                        "text": "<p>Evropská komise navrhuje směrnici s cílem omezit podíl biopaliv první generace – například řepky – v pohonných hmotách. Návrh směrnice vždy předkládá komise, evropský parlament ji ovšem k předložení zákona na určité téma může vyzvat.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52012PC0595'>Více na webu Evropské unie...</a></i></p>"
-                    }
+        function showDetails(point) {
+            var header;
+            var text;
+            switch (point) {
+                case Date.parse("2012-10-17"):
+                    header = "17. října 2010: Návrh směrnice";
+                    text = "<p>Evropská komise navrhuje směrnici s cílem omezit podíl biopaliv první generace – například řepky – v pohonných hmotách. Návrh směrnice vždy předkládá komise, evropský parlament ji ovšem k předložení zákona na určité téma může vyzvat.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52012PC0595'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2012-12-20"):
+                case Date.parse("2012-12-21"):
+                case Date.parse("2013-04-08"):
+                    header = "20. prosince 2012 - 8. dubna 2013: Reakce členských zemí";
+                    text = "<p>Před prvním čtením se k návrhu vyjadřují parlamenty členských zemí. Reaguje také český senát: připomíná například zhoubný vliv biopaliv první generace na půdu. Pokud by návrh směrnice odmítla třetina národních parlamentů, komise jej musí přepracovat (takzvaná žlutá karta).</p><p><i><a href='http://www.connefof.europarl.europa.eu/connefof/app/exp/COM(2012)0595#'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2013-02-22"):
+                case Date.parse("2013-03-21"):
+                case Date.parse("2013-06-06"):
+                case Date.parse("2013-06-18"):
+                    header = "2. února - 18. června 2013: Jednání rady";
+                    text = "<p>Návrh směrnice projednávají národní ministři z tematicky blízkých rezortů. Za Česko se jednání o biopalivech účastní ministr životního prostředí Tomáš Chalupa a náměstek ministra průmyslu pro energetiku Pavel Šolc.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/summary.do?id=1277801&t=e&l=en'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2013-07-29"):
+                    header = "29. července 2013: Zpráva parlamentního výboru";
+                    text = "<p>Podobně jako v národních parlamentech, i zde je klíčový názor výboru, v tomto případě Výboru pro životní prostředí, zdraví a potraviny. Upozorňuje například, že biopaliva první generace nejsou ohledně snižování emisí a vztahu k půdě příliš příznivá.</p><p><i><a href='https://www.europarl.europa.eu/sides/getDoc.do?pubRef=-//EP//TEXT+REPORT+A7-2013-0279+0+DOC+XML+V0//CS'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2013-09-11"):
+                    header = "11. září 2013: První čtení";
+                    text = "<p>Parlament na doporučení výboru poměrem 552:126 poslanců směrnici schvaluje. Přidává k ní řadu zpřesnění a zpřísnění, například požaduje přidat do pohonných hmot 2,5 % biopaliv z odpadů.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52013AP0357'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2013-12-12"):
+                case Date.parse("2014-06-13"):
+                case Date.parse("2014-12-09"):
+                    header = "12. prosince 2013 - 9. prosince 2014: Jednání rady po 1. čtení";
+                    text = "<p>Po parlamentním prvním čtení začíná vyjednávání parlamentu, komise i rady. Rada, tedy ministři členských zemí, v tomto případě většinu pozměňovacích návrhů odmítá, snižuje například podíl obnovitelných paliv druhé generace na 0,5 %.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015AG0002'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2014-12-16"):
+                    header = "16. prosince 2014: Reakce komise po 1. čtení";
+                    text = "<p>Na jednání rady reaguje Evropská komise. V tomto případě „s politováním konstatuje, že rada výrazně snížila úroveň ambicí v oblasti ochrany životního prostředí“.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52014PC0748'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2015-02-24"):
+                case Date.parse("2015-02-26"):
+                case Date.parse("2015-04-14"):
+                    header = "24. února - 4. dubna 2015: Zpráva parlamentního výboru";
+                    text = "<p>Na radu reaguje také parlamentní výbor, i on doporučuje opatření opět zpřísnit, například u odpadových biopaliv chce podíl v pohonných hmotách aspoň 1,25 %.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/summary.do?id=1379318&t=e&l=en'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2015-04-28"):
+                    header = "28. dubna 2015: Druhé čtení";
+                    text = "<p>Evropští poslanci hlasují o kompromisu z předchozích jednání. V řadě věcí ustupují, u zmiňovaného podílu biopaliv druhé generace vítězí návrh rady na 0,5 %.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015AP0100'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2015-06-17"):
+                    header = "17. června 2015: Reakce komise po 2. čtení";
+                    text = "<p>Komise všechny návrhy parlamentu přijímá.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015PC0310'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2015-07-13"):
+                    header = "13. července 2015: Reakce rady po 2. čtení";
+                    text = "<p>Ani rada nemá další návrhy.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/HIS/?uri=CELEX:32015L1513&qid=1558362384004#2012-10-17_ADP_byCOM'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+                case Date.parse("2015-09-09"):
+                    header = "9. září 2015: Podpis";
+                    text = "<p>Předseda Evropského parlamentu i Rady EU směrnici podepisují.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=2012/0288(COD)&l=en'>Více na webu Evropské unie...</a></i></p>";
+                    break;
+            }
+            document.getElementById("chart-desc-header").innerHTML = header;
+            document.getElementById("chart-desc-text").innerHTML = text;
+        }
+        Highcharts.setOptions({
+            lang: {
+                shortMonths: ['Led', 'Úno', 'Bře', 'Dub', 'Kvě', 'Čvn', 'Čvc', 'Srp', 'Zář', 'Říj', 'Lis', 'Pro'],
+            }
+        })
+        Highcharts.chart('chart', {
+            chart: {
+                type: 'scatter',
+            },
+            title: {
+                text: 'Legislativní proces EU'
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: {
+                type: "datetime",
+                startOnTick: true,
+                endOnTick: true,
+                showLastLabel: true
+            },
+            yAxis: {
+                title: {
+                    enabled: false,
                 },
-                {
-                    "start_date": {
-                        "day": "20",
-                        "month": "12",
-                        "year": "2012"
-                    },
-                    "end_date": {
-                        "day": "8",
-                        "month": "4",
-                        "year": "2013"
-                    },
-                    "group": "Národní parlamenty",
-                    "text": {
-                        "headline": "Reakce členských zemí",
-                        "text": "<p>Před prvním čtením se k návrhu vyjadřují parlamenty členských zemí. Reaguje také český senát: připomíná například zhoubný vliv biopaliv první generace na půdu. Pokud by návrh směrnice odmítla třetina národních parlamentů, komise jej musí přepracovat (takzvaná žlutá karta).</p><p><i><a href='http://www.connefof.europarl.europa.eu/connefof/app/exp/COM(2012)0595#'>Více na webu Evropské unie...</a></i></p>"
+                tickInterval: 1,
+                min: 0,
+                max: 4,
+                labels: {
+                    formatter: function () {
+                        switch (this.value) {
+                            case 4: return "Evropská komise";
+                            case 3: return "Národní parlamenty";
+                            case 2: return "Rada EU";
+                            case 1: return "Evropský parlament";
+                            case 0: return "";
+                            default: return this.value;
+                        }
                     }
-                },
-                {
-                    "start_date": {
-                        "day": "22",
-                        "month": "2",
-                        "year": "2013"
-                    },
-                    "end_date": {
-                        "day": "18",
-                        "month": "6",
-                        "year": "2013"
-                    },
-                    "group": "Rada",
-                    "text": {
-                        "headline": "Jednání rady",
-                        "text": "<p>Návrh směrnice projednávají národní ministři z tematicky blízkých rezortů. Za Česko se jednání o biopalivech účastní ministr životního prostředí Tomáš Chalupa a náměstek ministra průmyslu pro energetiku Pavel Šolc.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/summary.do?id=1277801&t=e&l=en'>Více na webu Evropské unie...</a></i></p>"
+                }
+            },
+            legend: {
+                enabled: false,
+            },
+            tooltip: {
+                formatter: function () {
+                    switch (this.x) {
+                        case Date.parse("2012-10-17"):
+                            return "17. října 2010<br><b>Evropská komise</b><br>Návrh směrnice";
+                        case Date.parse("2012-12-20"):
+                        case Date.parse("2012-12-21"):
+                        case Date.parse("2013-04-08"):
+                            return "12. prosince 2012 - 8. dubna 2014<br><b>Národní parlamenty</b><br> Reakce členských zemí";
+                        case Date.parse("2013-02-22"):
+                        case Date.parse("2013-03-21"):
+                        case Date.parse("2013-06-06"):
+                        case Date.parse("2013-06-18"):
+                            return "2. února - 18. června 2013<br><b>Rada EU</b><br>Jednání rady";
+                        case Date.parse("2013-07-29"):
+                            return "29. července 2013<br><b>Evropský parlament</b><br>Zpráva parlamentního výboru";
+                        case Date.parse("2013-09-11"):
+                            return "11. září 2013<br><b>Evropský parlament</b><br>První čtení";
+                        case Date.parse("2013-12-12"):
+                        case Date.parse("2014-06-13"):
+                        case Date.parse("2014-12-09"):
+                            return "12. prosince 2013 - 9. prosince 2014<br><b>Evropská rada</b><br>Jednání po 1. čtení";
+                        case Date.parse("2014-12-16"):
+                            return "16. prosince 2014<br><b>Evropská komise</b><br>Reakce po 1. čtení";
+                        case Date.parse("2015-02-24"):
+                        case Date.parse("2015-02-26"):
+                        case Date.parse("2015-04-14"):
+                            return "24. února - 4. dubna 2015<br><b>Evropský parlament</b><br>Zpráva parlamentního výboru";
+                        case Date.parse("2015-04-28"):
+                            return "28. dubna 2015<br><b>Evropský parlament</b><br>Druhé čtení";
+                        case Date.parse("2015-06-17"):
+                            return "17. června 2015<br><b>Evropská komise</b><br>Reakce po 2. čtení";
+                        case Date.parse("2015-07-13"):
+                            return "13. července 2015<br><b>Evropská rada</b><br>Reakce po 2. čtení";
+                        case Date.parse("2015-09-09"):
+                            return "9. září 2015<br><b>Evropský parlament a rada</b><br>Podpis";
                     }
-                },
-                {
-                    "start_date": {
-                        "day": "29",
-                        "month": "7",
-                        "year": "2013"
+                }
+            },
+            plotOptions: {
+                scatter: {
+                    marker: {
+                        radius: 5,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                lineColor: 'rgb(100,100,100)'
+                            }
+                        }
                     },
-                    "group": "Parlament",
-                    "text": {
-                        "headline": "Zpráva parlamentního výboru",
-                        "text": "<p>Podobně jako v národních parlamentech, i zde je klíčový názor výboru, v tomto případě Výboru pro životní prostředí, zdraví a potraviny. Upozorňuje například, že biopaliva první generace nejsou ohledně snižování emisí a vztahu k půdě příliš příznivá.</p><p><i><a href='https://www.europarl.europa.eu/sides/getDoc.do?pubRef=-//EP//TEXT+REPORT+A7-2013-0279+0+DOC+XML+V0//CS'>Více na webu Evropské unie...</a></i></p>"
+                    states: {
+                        hover: {
+                            marker: {
+                                enabled: false
+                            }
+                        }
+                    },
+                    point: {
+                        events: {
+                            click: function (event) {
+                                showDetails(event.point.x)
+                            }
+                        }
                     }
-                },
-                {
-                    "start_date": {
-                        "day": "11",
-                        "month": "9",
-                        "year": "2013"
-                    },
-                    "group": "Parlament",
-                    "text": {
-                        "headline": "První čtení",
-                        "text": "<p>Parlament na doporučení výboru poměrem 552:126 poslanců směrnici schvaluje. Přidává k ní řadu zpřesnění a zpřísnění, například požaduje přidat do pohonných hmot 2,5 % biopaliv z odpadů.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52013AP0357'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "12",
-                        "month": "12",
-                        "year": "2013"
-                    },
-                    "end_date": {
-                        "day": "9",
-                        "month": "12",
-                        "year": "2014"
-                    },
-                    "group": "Rada",
-                    "text": {
-                        "headline": "Jednání rady po 1. čtení",
-                        "text": "<p>Po parlamentním prvním čtení začíná vyjednávání parlamentu, komise i rady. Rada, tedy ministři členských zemí, v tomto případě většinu pozměňovacích návrhů odmítá, snižuje například podíl obnovitelných paliv druhé generace na 0,5 %.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015AG0002'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "16",
-                        "month": "12",
-                        "year": "2014"
-                    },
-                    "group": "Komise",
-                    "text": {
-                        "headline": "Reakce komise po 1. čtení",
-                        "text": "<p>Na jednání rady reaguje Evropská komise. V tomto případě „s politováním konstatuje, že rada výrazně snížila úroveň ambicí v oblasti ochrany životního prostředí“.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52014PC0748'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "24",
-                        "month": "2",
-                        "year": "2015"
-                    },
-                    "end_date": {
-                        "day": "14",
-                        "month": "4",
-                        "year": "2015"
-                    },
-                    "group": "Parlament",
-                    "text": {
-                        "headline": "Zpráva parlamentního výboru",
-                        "text": "<p>Na radu reaguje také parlamentní výbor, i on doporučuje opatření opět zpřísnit, například u odpadových biopaliv chce podíl v pohonných hmotách aspoň 1,25 %.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/summary.do?id=1379318&t=e&l=en'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "28",
-                        "month": "4",
-                        "year": "2015"
-                    },
-                    "group": "Parlament",
-                    "text": {
-                        "headline": "Druhé čtení",
-                        "text": "<p>Evropští poslanci hlasují o kompromisu z předchozích jednání. V řadě věcí ustupují, u zmiňovaného podílu biopaliv druhé generace vítězí návrh rady na 0,5 %.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015AP0100'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "17",
-                        "month": "6",
-                        "year": "2015"
-                    },
-                    "group": "Komise",
-                    "text": {
-                        "headline": "Reakce komise po 2. čtení",
-                        "text": "<p>Komise všechny návrhy parlamentu přijímá.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52015PC0310'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "13",
-                        "month": "7",
-                        "year": "2015"
-                    },
-                    "group": "Rada",
-                    "text": {
-                        "headline": "Reakce rady po 2. čtení",
-                        "text": "<p>Ani rada nemá další návrhy.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/HIS/?uri=CELEX:32015L1513&qid=1558362384004#2012-10-17_ADP_byCOM'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                },
-                {
-                    "start_date": {
-                        "day": "9",
-                        "month": "9",
-                        "year": "2015"
-                    },
-                    "group": "Rada",
-                    "text": {
-                        "headline": "Podpis",
-                        "text": "<p>Předseda Evropského parlamentu i Rady EU směrnici podepisují.</p><p><i><a href='https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=2012/0288(COD)&l=en'>Více na webu Evropské unie...</a></i></p>"
-                    }
-                }, 
-            ]
-        };
-        window.timeline = new TL.Timeline('timeline-embed', timeline_json, {language: "cz"});
+                }
+            },
+            series: [{
+                name: 'Evropská komise',
+                data: [
+                    [Date.parse("2012-10-17"), 4],
+                    [Date.parse("2014-12-16"), 4],
+                    [Date.parse("2015-06-17"), 4],
+                ]
+
+            }, {
+                name: 'Národní parlamenty',
+                data: [
+                    [Date.parse("2012-12-20"), 3],
+                    [Date.parse("2012-12-21"), 3],
+                    [Date.parse("2013-04-08"), 3],
+                ]
+            }, {
+                name: 'Rada EU',
+                data: [
+                    [Date.parse("2013-02-22"), 2],
+                    [Date.parse("2013-03-21"), 2],
+                    [Date.parse("2013-06-06"), 2],
+                    [Date.parse("2013-06-18"), 2],
+                    [Date.parse("2013-12-12"), 2],
+                    [Date.parse("2014-06-13"), 2],
+                    [Date.parse("2014-12-09"), 2],
+                    [Date.parse("2015-07-13"), 2],
+                    [Date.parse("2015-09-09"), 2],
+                ]
+            }, {
+                name: 'Evropský parlament',
+                data: [
+                    [Date.parse("2013-07-29"), 1],
+                    [Date.parse("2013-09-11"), 1],
+                    [Date.parse("2015-02-24"), 1],
+                    [Date.parse("2015-02-26"), 1],
+                    [Date.parse("2015-04-14"), 1],
+                    [Date.parse("2015-04-28"), 1],
+                ]
+            }]
+        });
+        showDetails(Date.parse("2012-10-17"));
     </script>
 
 </body>
+
 </html>
