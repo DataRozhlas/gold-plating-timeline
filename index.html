@@ -9,18 +9,50 @@
 
 <body>
     <style>
+        #chart-desc {
+            height:250px;
+            max-width:620px;
+            background-color: #d9edf7;
+            font-family: sans-serif;
+            padding:20px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content:space-between;
+        }
+
         .highcharts-point {
             cursor: pointer;
         }
     </style>
-    <div id="chart-desc" style="min-height:200px;max-width:620px;margin:0 auto;background-color: #d9edf7;font-family: sans-serif;padding:20px;">
+    <div id="chart-desc">
         <h2 id="chart-desc-header"></h2>
         <div id="chart-desc-text"></div>
+        <div id="chart-nav" style="display:flex; justify-content: space-between;">
+            <a id="button-prev" href="#">&lt;&lt; Předchozí</a>
+            <a id="button-next" href="#">Další &gt;&gt;</a>
+        </div>
     </div>
     <div id="chart" style="max-width:620px;height:200px;margin:0 auto;"></div>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script>
+        var curPoint = Date.parse("2012-10-17");
+
+        var points = [Date.parse("2012-10-17"), Date.parse("2012-12-20"), Date.parse("2013-02-22"),
+        Date.parse("2013-07-29"), Date.parse("2013-09-11"), Date.parse("2013-12-12"), Date.parse("2014-12-16"),
+        Date.parse("2015-02-24"), Date.parse("2015-04-28"), Date.parse("2015-06-17"), Date.parse("2015-07-13"),
+        Date.parse("2015-09-09")];
+
+        document
+            .getElementById("button-next")
+            .addEventListener("click", function () { showDetails(points[(points.indexOf(curPoint) + 1) % points.length]) });
+
+        document
+            .getElementById("button-prev")
+            .addEventListener("click", function () { showDetails(points[(points.length + points.indexOf(curPoint) - 1) % points.length]) });
+
         function showDetails(point) {
+            curPoint = point;
             var header;
             var text;
             switch (point) {
@@ -29,8 +61,7 @@
                     text = "<p>Evropská komise navrhuje směrnici s cílem omezit podíl biopaliv první generace – například řepky – v pohonných hmotách. Návrh směrnice vždy předkládá komise, evropský parlament ji ovšem k předložení zákona na určité téma může vyzvat.</p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52012PC0595'>Více na webu Evropské unie...</a></i></p>";
                     break;
                 case Date.parse("2012-12-20"):
-                case Date.parse("2012-12-21"):
-                case Date.parse("2013-04-08"):
+
                     header = "20. prosince 2012 - 8. dubna 2013: Reakce členských zemí";
                     text = "<p>Před prvním čtením se k návrhu vyjadřují parlamenty členských zemí. Reaguje také český senát: připomíná například zhoubný vliv biopaliv první generace na půdu. Pokud by návrh směrnice odmítla třetina národních parlamentů, komise jej musí přepracovat (takzvaná žlutá karta).</p><p><i><a href='http://www.connefof.europarl.europa.eu/connefof/app/exp/COM(2012)0595#'>Více na webu Evropské unie...</a></i></p>";
                     break;
@@ -207,19 +238,12 @@
                 name: 'Národní parlamenty',
                 data: [
                     [Date.parse("2012-12-20"), 3],
-                    [Date.parse("2012-12-21"), 3],
-                    [Date.parse("2013-04-08"), 3],
                 ]
             }, {
                 name: 'Rada EU',
                 data: [
                     [Date.parse("2013-02-22"), 2],
-                    [Date.parse("2013-03-21"), 2],
-                    [Date.parse("2013-06-06"), 2],
-                    [Date.parse("2013-06-18"), 2],
                     [Date.parse("2013-12-12"), 2],
-                    [Date.parse("2014-06-13"), 2],
-                    [Date.parse("2014-12-09"), 2],
                     [Date.parse("2015-07-13"), 2],
                     [Date.parse("2015-09-09"), 2],
                 ]
@@ -229,13 +253,11 @@
                     [Date.parse("2013-07-29"), 1],
                     [Date.parse("2013-09-11"), 1],
                     [Date.parse("2015-02-24"), 1],
-                    [Date.parse("2015-02-26"), 1],
-                    [Date.parse("2015-04-14"), 1],
                     [Date.parse("2015-04-28"), 1],
                 ]
             }]
         });
-        showDetails(Date.parse("2012-10-17"));
+        showDetails(curPoint);
     </script>
 
 </body>
