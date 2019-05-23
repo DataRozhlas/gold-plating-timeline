@@ -8,17 +8,19 @@
 </head>
 
 <body>
+    <div id="chart"></div>
     <div id="chart-desc">
-        <div id="chart-desc-date"></div>
-        <div id="chart-desc-header"></div>
-        <div id="chart-desc-text"></div>
         <div id="chart-nav">
             <button id="button-prev">« Předchozí</button>
+            <div id="chart-desc-header-container">
+                <div id="chart-desc-header"></div>
+                <div id="chart-desc-date"></div>
+            </div>
             <button id="button-next">Další »</button>
         </div>
+        <div id="chart-desc-text"></div>
     </div>
-    <div id="chart"></div>
-    <script src="https://code.highcharts.com/highcharts.js"></script> 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
 </body>
