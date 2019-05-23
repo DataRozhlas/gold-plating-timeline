@@ -11,7 +11,7 @@ function showDetails(point) {
 
   switch (point) {
     case Date.parse("2012-10-17"):
-      date = "17. října 2010";
+      date = "17. října 2012";
       header = "Návrh směrnice";
       text = "<p><p>Evropská komise navrhuje směrnici s cílem omezit podíl biopaliv první generace – například řepky – v pohonných hmotách.</p><p>Návrh každé směrnice předkládá komise, Evropský parlament ji ovšem k předložení zákona na určité téma může vyzvat. Ještě před „vykopnutím“ komise legislativní návrh veřejně konzultuje na webu, kde se může kdokoliv zapojit.</p><p>Většinu důležitých návrhů předchází studie zhodnocující dopady, včetně statistik a srování mezi členskými zeměmi. Vychází společně s návrhem a je veřejná.</p><p>Když je návrh Evropské komise na světě, obvykle prochází řádným legislativním postupem, při kterém Evropský parlament a Rada EU návrh komise pozměňují a na konci se shodnou na kompromisním textu a schválí ho. Ve výjimečných případech rozhoduje rada nebo komise samostatně.</p></p><p><i><a href='https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=celex:52012PC0595'>Více na webu Evropské unie...</a></i></p>";
       break;
