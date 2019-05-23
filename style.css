@@ -29,6 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 #chart-desc-header {
@@ -68,4 +69,21 @@ button:focus {
 
 button:active {
     transform: scale(0.99);
+}
+
+@media only screen and (max-width: 600px) {
+    #chart-nav {
+        padding-bottom: initial; 
+        flex-wrap: wrap;
+    }
+
+    #chart-desc-header-container {
+        order: 99;
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    #button-prev, #button-next {
+        width: 30%;
+    }
 }
