@@ -258,4 +258,8 @@ document.getElementById("button-next").addEventListener("click", function () {
 document.getElementById("button-prev").addEventListener("click", function () {
   showDetails(points[(points.length + points.indexOf(curPoint) - 1) % points.length]);
 });
+window.addEventListener("keydown", function (e) {
+  if (e.keyCode === 39) showDetails(points[(points.indexOf(curPoint) + 1) % points.length]);
+  if (e.keyCode === 37) showDetails(points[(points.length + points.indexOf(curPoint) - 1) % points.length]);
+});
 showDetails(curPoint);
