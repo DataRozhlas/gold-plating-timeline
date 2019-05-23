@@ -1,5 +1,5 @@
 var curPoint = Date.parse("2012-10-17");
-var points = [Date.parse("2012-10-17"), Date.parse("2012-12-20"), Date.parse("2013-02-22"), Date.parse("2013-07-29"), Date.parse("2013-09-11"), Date.parse("2013-12-12"), Date.parse("2014-12-16"), Date.parse("2015-02-24"), Date.parse("2015-04-28"), Date.parse("2015-06-17"), Date.parse("2015-07-13"), Date.parse("2015-09-09")];
+var points = [Date.parse("2012-10-17"), Date.parse("2012-12-20"), Date.parse("2013-02-22"), Date.parse("2013-07-29"), Date.parse("2013-09-11"), Date.parse("2013-12-12"), Date.parse("2014-12-16"), Date.parse("2015-02-24"), Date.parse("2015-04-28"), Date.parse("2015-06-17"), Date.parse("2015-07-13"), Date.parse("2015-09-09"), Date.parse("2018-08-16")];
 
 function showDetails(point) {
   var date;
@@ -89,6 +89,12 @@ function showDetails(point) {
       text = "<p><p>Předseda Evropského parlamentu i Rady EU směrnici podepisují.</p></p><p>&nbsp;</p>";
       break;
 
+    case Date.parse("2018-08-16"):
+      date = "16. srpna 2018";
+      header = "Přijetí implementačního zákona";
+      text = "<p><p>Směrnici musí ještě do své legislativy transponovat členské země: obvykle na to mají dva roky.</p><p>Český parlament termín pro přijetí zákona – 10. září 2017 – nestihl. Implementační zákon přijal až téměř o rok později, 16. srpna 2018. Zákon má navíc nedostatky, jak v lednu 2019 upozornila Evropská komise.</p><p>Spor mezi Evropskou komisí a členskou zemí o výklad směrnice, stejně jako pozdní implementaci, řeší Soudní dvůr EU. Ten odpovídá za jednotnost výkladu unijního práva a kontroluje rozhodování Rady EU a Evropské komise.</p></p><p><i><a href='https://www.zakonyprolidi.cz/cs/2018-172'>Více na webu Zákony pro lidi...</a></i></p>";
+      break;
+
     default:
       date = "";
       header = "";
@@ -165,7 +171,7 @@ Highcharts.chart("chart", {
         case Date.parse("2012-12-20"):
         case Date.parse("2012-12-21"):
         case Date.parse("2013-04-08"):
-          return "12. prosince 2012 - 8. dubna 2014<br><b>Národní parlamenty</b><br> Reakce členských zemí";
+          return "12. prosince 2012 - 8. dubna 2014<br><b>Národní parlamenty</b><br>Reakce členských zemí";
 
         case Date.parse("2013-02-22"):
         case Date.parse("2013-03-21"):
@@ -204,6 +210,9 @@ Highcharts.chart("chart", {
         case Date.parse("2015-09-09"):
           return "9. září 2015<br><b>Evropský parlament a rada</b><br>Podpis";
 
+        case Date.parse("2018-08-16"):
+          return "16. srpna 2018<br><b>Národní parlamenty</b><br>Přijetí implementačního zákona";
+
         default:
           return "";
       }
@@ -237,7 +246,8 @@ Highcharts.chart("chart", {
     { x: Date.parse("2015-06-17"), y: 4, id: "p" + Date.parse("2015-06-17") }]
   }, {
     name: "Národní parlamenty",
-    data: [{ x: Date.parse("2012-12-20"), y: 3, id: "p" + Date.parse("2012-12-20") }]
+    data: [{ x: Date.parse("2012-12-20"), y: 3, id: "p" + Date.parse("2012-12-20") },
+    { x: Date.parse("2018-08-16"), y: 3, id: "p" + Date.parse("2018-08-16") }]
   }, {
     name: "Rada EU",
     data: [{ x: Date.parse("2013-02-22"), y: 2, id: "p" + Date.parse("2013-02-22") },
